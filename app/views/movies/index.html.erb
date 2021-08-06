@@ -1,10 +1,16 @@
 <div class="movies" data-controller="navigation"
-     data-action="turbo:before-fetch-request@document->navigation#displayLoading turbo:before-fetch-response@document->navigation#displayContent"
+     data-action="turbo:before-fetch-response@document->navigation#displayContent"
 >
-
   <%= turbo_frame_tag :index, class: "movie-cards" do %>
     <% @movies.each do |movie| %>
-      <%= link_to movie_path(movie[:slug]), "data-turbo-frame": "details", class: "movie-card" do %>
+      <%= link_to movie_path(movie[:slug]),
+        data: {
+          turbo_frame: "details",
+          action: "click->navigation#displayLoading",
+          navigation_target: "link",
+          item_id: movie[:slug]
+        },
+        class: "movie-card" do %>
         <div class="movie-item-content">
           <%= image_tag(movie[:thumb]) %>
 

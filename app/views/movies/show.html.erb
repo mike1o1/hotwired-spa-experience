@@ -1,26 +1,28 @@
 <%= turbo_frame_tag :details do %>
+  <div data-item-id="<%= @movie[:slug] %>">
+    <p>
+      Title: <%= @movie[:title] %>
+    </p>
 
-  <p>
-    Title: <%= @movie[:title] %>
-  </p>
+    <p>
+      Summary: <%= @movie[:summary] %>
+    </p>
 
-  <p>
-    Summary: <%= @movie[:summary] %>
-  </p>
+    <p>
+      Director: <%= @movie[:director] %>
+    </p>
 
-  <p>
-    Director: <%= @movie[:director] %>
-  </p>
+    <p>
+      Length: <%= @movie[:length] %>
+    </p>
 
-  <p>
-    Length: <%= @movie[:length] %>
-  </p>
+    <p>
+      Genre: <%= @movie[:genre] %>
+    </p>
 
-  <p>
-    Genre: <%= @movie[:genre] %>
-  </p>
+    <p>
+      Year: <%= @movie[:year] %>
+    </p>
+  </div>
 
-  <p>
-    Year: <%= @movie[:year] %>
-  </p>
 <% end %>

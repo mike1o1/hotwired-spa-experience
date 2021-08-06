@@ -1,26 +1,29 @@
-// Visit The Stimulus Handbook for more details
-// https://stimulusjs.org/handbook/introduction
-//
-// This example controller works with specially annotated HTML like:
-//
-// <div data-controller="hello">
-//   <h1 data-target="hello.output"></h1>
-// </div>
-
-import { Controller } from "stimulus"
+import { Controller } from 'stimulus';
 
 export default class extends Controller {
-  static targets = [ 'content', 'loading' ]
+  static targets = [ 'content', 'loading', 'link'];
 
-  displayLoading() {
-    console.log('display loading...');
+  displayLoading(event) {
     this.loadingTarget.classList.remove('hidden');
     this.contentTarget.classList.add('hidden');
+
+    let value = event.currentTarget.dataset['itemId'];
+
+    this.updateLinks(value);
   }
 
   displayContent() {
-    console.log('display content...')
     this.loadingTarget.classList.add('hidden');
     this.contentTarget.classList.remove('hidden');
+  }
+
+  updateLinks(item) {
+    this.linkTargets.forEach((link) => {
+
+      link.classList.remove('selected');
+      if (link.dataset['itemId'] === item) {
+        link.classList.add('selected');
+      }
+    })
   }
 }
