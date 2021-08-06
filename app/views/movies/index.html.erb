@@ -1,0 +1,28 @@
+<div class="movies" data-controller="navigation"
+     data-action="turbo:before-fetch-request@document->navigation#displayLoading turbo:before-fetch-response@document->navigation#displayContent"
+>
+
+  <%= turbo_frame_tag :index, class: "movie-cards" do %>
+    <% @movies.each do |movie| %>
+      <%= link_to movie_path(movie[:slug]), "data-turbo-frame": "details", class: "movie-card" do %>
+        <div class="movie-item-content">
+          <%= image_tag(movie[:thumb]) %>
+
+          <div class="movie-item-detail text-center">
+            <%= movie[:title] %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <turbo-frame class="movie-detail" id="details" data-navigation-target="content">
+    Select a movie for more details...
+  </turbo-frame>
+
+  <div class="loading-indicator hidden"
+       data-navigation-target="loading">
+    <%= image_tag("loading.gif") %>
+  </div>
+
+</div>
