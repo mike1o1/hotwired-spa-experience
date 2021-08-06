@@ -1,13 +1,13 @@
 import { Controller } from 'stimulus';
 
 export default class extends Controller {
-  static targets = [ 'content', 'loading', 'link'];
+  static targets = ['content', 'loading', 'link'];
 
   displayLoading(event) {
     this.loadingTarget.classList.remove('hidden');
     this.contentTarget.classList.add('hidden');
 
-    let value = event.currentTarget.dataset['itemId'];
+    let value = event.detail.url;
 
     this.updateLinks(value);
   }
@@ -21,7 +21,7 @@ export default class extends Controller {
     this.linkTargets.forEach((link) => {
 
       link.classList.remove('selected');
-      if (link.dataset['itemId'] === item) {
+      if (link.href === item) {
         link.classList.add('selected');
       }
     })

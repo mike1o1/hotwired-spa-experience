@@ -6,9 +6,8 @@
       <%= link_to movie_path(movie[:slug]),
         data: {
           turbo_frame: "details",
-          action: "click->navigation#displayLoading",
-          navigation_target: "link",
-          item_id: movie[:slug]
+          action: "turbo:click->navigation#displayLoading",
+          navigation_target: "link"
         },
         class: "movie-card" do %>
         <div class="movie-item-content">
@@ -22,9 +21,9 @@
     <% end %>
   <% end %>
 
-  <turbo-frame class="movie-detail" id="details" data-navigation-target="content">
+  <%= turbo_frame_tag :details, class: "movie-detail", "data-navigation-target": "content" do %>
     Select a movie for more details...
-  </turbo-frame>
+  <% end %>
 
   <div class="loading-indicator hidden"
        data-navigation-target="loading">
